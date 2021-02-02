@@ -150,12 +150,10 @@ export default class MultiSlider extends React.Component {
       return;
     }
 
-    const accumDistance = this.props.vertical
-      ? -gestureState.dy
-      : gestureState.dx;
-    const accumDistanceDisplacement = this.props.vertical
-      ? gestureState.dx
-      : gestureState.dy;
+    const accumDistance = I18nManager.isRTL ? this.props.vertical ? gestureState.dy : gestureState.dx 
+      : this.props.vertical ? -gestureState.dy : gestureState.dx 
+    const accumDistanceDisplacement = I18nManager.isRTL ? this.props.vertical ? -gestureState.dx : gestureState.dy
+      : this.props.vertical ? gestureState.dx : gestureState.dy
 
     const unconfined = I18nManager.isRTL
       ? this.state.pastOne - accumDistance
@@ -447,7 +445,7 @@ export default class MultiSlider extends React.Component {
 
     if (this.props.vertical) {
       containerStyle.push({
-        transform: [{ rotate: '-90deg' }],
+        transform: I18nManager.isRTL ? [{ rotate: '90deg' }] : [{ rotate: '-90deg' }],
       });
     }
 
